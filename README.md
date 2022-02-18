@@ -1,185 +1,94 @@
 # Project 2 - Ames Housing Data and Kaggle Challenge
 
-Welcome to Project 2! It's time to start modeling.
 
-**Primary Learning Objectives:**
+### Problem Statement
 
-1. Creating and iteratively refining a regression model
-1. Using [Kaggle](https://www.kaggle.com/) to practice the modeling process
-1. Providing business insights through reporting and presentation.
+As a team at a small real estate company in Ames Iowa we are working to: 
+    1. understand what the primary factors are in determining the sale price of a home;
+    2. generate estimates for appropriate sale pricing of upcoming homes.
 
-You are tasked with creating a regression model based on the Ames Housing Dataset. This model will predict the price of a house at sale.
+### Data Dictionary
+#### Kaggle Model Features
+|Feature|Type|Dataset|Description|
+|---|---|---|---|
+|**Overall Qual Year Built_mod**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by Year Built with transforms applied|
+|**Exter Qual_TA TotRms AbvGrd**|float|02_Processing_Kaggle_TopScore|Total Rooms Above Ground filtered by Exterior Quality Grade (Grade: Average)|
+|**Garage Area Year Built**|float|02_Processing_Kaggle_TopScore|Garage Area multiplied by the Year Built|
+|**Garage Cars 1st Flr SF**|float|02_Processing_Kaggle_TopScore|Number of Cars the Garage is built for multiplied by First Floor Area|
+|**Garage Area^2**|float|02_Processing_Kaggle_TopScore|Garage Area multiplied into itself|
+|**Overall Qual Garage Area**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by Garage Area|
+|**Garage Area Foundation_PConc**|float|02_Processing_Kaggle_TopScore|Garage Area filtered by Poured Concrete Foundation|
+|**Garage Area Total Bsmt SF**|float|02_Processing_Kaggle_TopScore|Garage Area multiplied by Total Basement Area|
+|**Kitchen Qual_TA TotRms AbvGrd**|float|02_Processing_Kaggle_TopScore|Total Rooms Above Ground filtered by Kitchen Quality Grade (Grade: Average)|
+|**Overall Qual 1st Flr SF**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by First Floor Area|
+|**Garage Area Mas Vnr Area**|float|02_Processing_Kaggle_TopScore|Garage Area multiplied by Masonry Veneer Area|
+|**Overall Qual Exter Qual_TA**|float|02_Processing_Kaggle_TopScore|Home Quality Rating filtered by External Quality Grade (Grade: Average)|
+|**Full Bath^2**|float|02_Processing_Kaggle_TopScore|Number of Full Baths multiplied into itself|
+|**Year Built Foundation_PConc**|float|02_Processing_Kaggle_TopScore|Year Built filtered by Poured Concrete Foundation|
+|**Mas Vnr Area**|float|02_Processing_Kaggle_TopScore|Masonry Veneer Area|
+|**Garage Area 1st Flr SF**|float|02_Processing_Kaggle_TopScore|Garage Area multiplied by First Floor Area|
+|**Total Bsmt SF Mas Vnr Area**|float|02_Processing_Kaggle_TopScore|Basement Area multiplied by Masonry Veneer Area|
+|**Overall Qual TotRms AbvGrd**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by the Total Number of Rooms Above Ground|
+|**Gr Liv Area Garage Cars**|float|02_Processing_Kaggle_TopScore|Above Ground Living Area multiplied by Number of Cars the Garage is built for|
+|**Gr Liv Area^2**|float|02_Processing_Kaggle_TopScore|Above Ground Living Area multiplied into itself|
+|**Exter Qual_TA**|float|02_Processing_Kaggle_TopScore|Filtering by Exterior Quality Grade (Grade: Average)|
+|**Garage Cars Year Built**|float|02_Processing_Kaggle_TopScore|Number of Cars the Garage was built for multiplied by the Year the Home was Built|
+|**Mas Vnr Area TotRms AbvGrd**|float|02_Processing_Kaggle_TopScore|Masonry Veneer Area multiplied by the Total Number of Rooms Above Ground|
+|**Gr Liv Area Mas Vnr Area**|float|02_Processing_Kaggle_TopScore|Above Ground Living Area multiplied by Masonry Veneer Area|
+|**Total Bsmt SF 1st Flr SF**|float|02_Processing_Kaggle_TopScore|Total Basement Area multiplied by First Floor Area|
+|**Full Bath**|float|02_Processing_Kaggle_TopScore|Number of Full Baths|
+|**Gr Liv Area Year Built**|float|02_Processing_Kaggle_TopScore|Above Ground Living Area multiplied by Year Built|
+|**Overall Qual Gr Liv Area**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by Total Living Area|
+|**Overall Qual Full Bath**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by the Number of Full Baths|
+|**Gr Liv Area Full Bath**|float|02_Processing_Kaggle_TopScore|Above Ground Living Area multiplied by the number of Full Baths|
+|**Overall Qual Total Bsmt SF**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by Total Basement Area|
+|**Overall Qual Year Built**|float|02_Processing_Kaggle_TopScore|Home Quality Rating multiplied by Year Built|
+|**Gr Liv Area TotRms AbvGrd**|float|02_Processing_Kaggle_TopScore|Above Ground Living Area multiplied by the Total Number of Rooms Above Ground|
+|**GR Rooms by GR Liv Area**|float|02_Processing_SimplifiedApproach|Number of Above Ground Rooms relative to Above Ground Living Area|
+|**Year Remod/Add**|float|02_Processing_SimplifiedApproach|Year of Remodel or Addition|
+|**Garage Cars**|float|02_Processing_SimplifiedApproach|Number of Cars the Garage was built for|
+|**Year Built**|float|02_Processing_SimplifiedApproach|Year the Home was Built|
+|**Gr Liv Area**|float|02_Processing_SimplifiedApproach|Above Ground Living Area|
+|**Overall Qual**|float|02_Processing_SimplifiedApproach|Home Quality Rating|
 
-The Ames Housing Dataset is an exceptionally detailed and robust dataset with over 70 columns of different features relating to houses.
+### Summary of Analysis
 
-Secondly, we are hosting a competition on Kaggle to give you the opportunity to practice the following skills:
+#### Data
 
-- Refining models over time
-- Use of train-test split, cross-validation, and data with unknown values for the target to simulate the modeling process
-- The use of Kaggle as a place to practice data science
+Information on home sales and home qualities for Ames Iowa was retrieved from the Kaggle 'Ames Housing Data' dataset.
 
-As always, you will be submitting a technical report and a presentation. **You may find that the best model for Kaggle is not the best model to address your data science problem.**
+#### Methodology
 
-## Set-up
+##### Cleaning
+1. Null values were identified and variable datatypes were identified and corrected as necessary. 
+2. Variables were separated into numerical and non-numerical datatype groups.
+3. Non-numerical variables were processed to determine category correlation relative to the target variable
+4. Highest correlated variables were identified and downselected for inclusion in cleaned dataset
+5. Kaggle competition data was processed to match variables in training dataset
+6. Filtered training and Kaggle datasets were output into unique .csv files
 
-Before you begin working on this project, please do the following:
+##### Processing
+1. Filtered training data was pulled in, and polynomial features were created for all variables excepting the target variable
+2. Polyfit training data was fed into LASSO for feature selection
+3. Top features by absolute value of coefficients were selected according to LASSO results
+4. Linear model was created with top features, and evaluated
+5. Outliers were identified, but causation remained hidden
+6. High Variance Inflation Factor (VIF) features were identified and addressed
+7.  Transformations were applied to specific features, including the target, to try to produce a more linear relationship with the target, and models refit accordingly
+8.  Kaggle data was processed according to final training data form, and predictions were made using the linear model on the Kaggle data
 
-1. Sign up for an account on [Kaggle](https://www.kaggle.com/)
-2. **IMPORTANT**: Click this link ([Regression Challenge Sign Up](https://www.kaggle.com/t/2a2be97fb689412aaa4b9254ebf7c8ce)) to **join** the competition (otherwise you will not be able to make submissions!)
-3. Review the material on the [DSIR-0124 Regression Challenge](https://www.kaggle.com/c/dsir-0124-project-2-regression-challenge)
-4. Review the [data description](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt).
+Specifically we were seeking to identify: 
+    - What are the primary factors that determine and enable accurate prediction of home sales prices in Ames, Iowa
+	- What model provides us with our best estimate of home values in Ames, and what is its relative performance to a baseline.
 
-## The Modeling Process
+### Conclusions & Recommendations
 
-1. The train dataset has all of the columns that you will need to generate and refine your models. The test dataset has all of those columns except for the target that you are trying to predict in your Regression model.
-2. Generate your regression model using the training data. We expect that within this process, you'll be making use of:
-    - train-test split
-    - cross-validation / grid searching for hyperparameters
-    - strong exploratory data analysis to question correlation and relationship across predictive variables
-    - code that reproducibly and consistently applies feature transformation (such as the preprocessing library)
-3. Predict the values for your target column in the test dataset and submit your predictions to Kaggle to see how your model does against unknown data.
-    - **Note**: Kaggle expects to see your submissions in a specific format. Check the challenge's page to make sure you are formatting your CSVs correctly!
-    - **You are limited to models you've learned in class**. In other words, you cannot use XGBoost, Neural Networks or any other advanced model for this project.
-4. Evaluate your models!
-    - consider your evaluation metrics
-    - consider your baseline score
-    - how can your model be used for inference?
-    - why do you believe your model will generalize to new data?
+#### Conclusions:
+While the model developed is a significant improvement over baseline, it underperforms its peers in the market, and is difficult to ascertain exact impact of features due to coefficients being obscured through LASSO regularization. 
 
-## Submission
+The model does point towards recurring features that appear to have outsized effect, namely: Overall Quality Rating of the Home, Above Ground Living Area, Year Built, Number Car Garage, Year of Remodel, and finally, an inverse relationship with Number of Rooms divided by Above Ground Living Area. This is verified using a substantially simplified model, that while underperforming its more complex cousin, is far more legible and also outperforms the baseline significantly.
 
-Materials must be submitted by the beginning of class on **Friday, February 18**.
+#### Recommendations:
+1. As a starting position, we can advise clients who are selling their homes that the overall appearance of quality is of top importance in fetching a high price, and that recent remodels are also valuable. Additionally, when performing a remodel, it is advised to prioritize the size of rooms in the house over the total number of rooms. 
 
-The last day for the Kaggle competition will be **Friday, February 18**.
-
-Your technical report will be hosted on Github Enterprise. Make sure it includes:
-
-- A README.md (that isn't this file)
-- Jupyter notebook(s) with your analysis and models (renamed to describe your project)
-- At least one successful prediction submission on [DSIR-0124 Regression Challenge](https://www.kaggle.com/c/dsir-0124-project-2-regression-challenge) --  you should see your name in the "[Leaderboard](https://www.kaggle.com/c/dsir-0124-project-2-regression-challenge/leaderboard)" tab.
-- Data files
-- Presentation slides
-- Any other necessary files (images, etc.)
-
-**Check with your local instructor for how they would like you to submit your repo for review.**
-
----
-
-## Presentation Structure
-
-- **Must be within time limit established by local instructor.**
-- Use Google Slides or some other visual aid (Keynote, Powerpoint, etc).
-- Consider the audience. **Check with your local instructor for direction**.
-- Start with the **data science problem**.
-- Use visuals that are appropriately scaled and interpretable.
-- Talk about your procedure/methodology (high level).
-- Talk about your primary findings.
-- Make sure you provide **clear recommendations** that follow logically from your analyses and narrative and answer your data science problem.
-
-Be sure to rehearse and time your presentation before class.
-
----
-
-## Rubric
-
-Your local instructor will evaluate your project (for the most part) using the following criteria.  You should make sure that you consider and/or follow most if not all of the considerations/recommendations outlined below **while** working through your project.
-
-**Scores will be out of 27 points based on the 9 items in the rubric.** 
-*3 points per section*
-
-| Score | Interpretation |
-| --- | --- |
-| **0** | *Project fails to meet the minimum requirements for this item.* |
-| **1** | *Project meets the minimum requirements for this item, but falls significantly short of portfolio-ready expectations.* |
-| **2** | *Project exceeds the minimum requirements for this item, but falls short of portfolio-ready expectations.* |
-| **3** | *Project meets or exceeds portfolio-ready expectations; demonstrates a thorough understanding of every outlined consideration.* |
-
-### The Data Science Process
-
-**Problem Statement**
-- Is it clear what the student plans to do?
-- What type of model will be developed?
-- How will success be evaluated?
-- Is the scope of the project appropriate?
-- Is it clear who cares about this or why this is important to investigate?
-- Does the student consider the audience and the primary and secondary stakeholders?
-
-**Data Cleaning and EDA**
-- Are missing values imputed appropriately?
-- Are distributions examined and described?
-- Are outliers identified and addressed?
-- Are appropriate summary statistics provided?
-- Are steps taken during data cleaning and EDA framed appropriately?
-- Does the student address whether or not they are likely to be able to answer their problem statement with the provided data given what they've discovered during EDA?
-
-**Preprocessing and Modeling**
-- Are categorical variables one-hot encoded?
-- Does the student investigate or manufacture features with linear relationships to the target?
-- Have the data been scaled appropriately?
-- Does the student properly split and/or sample the data for validation/training purposes?
-- Does the student utilize feature selection to remove noisy or multi-collinear features?
-- Does the student test and evaluate a variety of models to identify a production algorithm (**AT MINIMUM:** linear regression, lasso, and ridge)?
-- Does the student defend their choice of production model relevant to the data at hand and the problem?
-- Does the student explain how the model works and evaluate its performance successes/downfalls?
-
-**Evaluation and Conceptual Understanding**
-- Does the student accurately identify and explain the baseline score?
-- Does the student select and use metrics relevant to the problem objective?
-- Is more than one metric utilized in order to better assess performance?
-- Does the student interpret the results of their model for purposes of inference?
-- Is domain knowledge demonstrated when interpreting results?
-- Does the student provide appropriate interpretation with regards to descriptive and inferential statistics?
-
-**Conclusion and Recommendations**
-- Does the student provide appropriate context to connect individual steps back to the overall project?
-- Is it clear how the final recommendations were reached?
-- Are the conclusions/recommendations clearly stated?
-- Does the conclusion answer the original problem statement?
-- Does the student address how findings of this research can be applied for the benefit of stakeholders?
-- Are future steps to move the project forward identified?
-
-### Organization and Professionalism
-
-**Project Organization**
-- Are modules imported correctly (using appropriate aliases)?
-- Are data imported/saved using relative paths?
-- Does the README provide a good executive summary of the project?
-- Is markdown formatting used appropriately to structure notebooks?
-- Are there an appropriate amount of comments to support the code?
-- Are files & directories organized correctly?
-- Are there unnecessary files included?
-- Do files and directories have well-structured, appropriate, consistent names?
-
-**Visualizations**
-- Are sufficient visualizations provided?
-- Do plots accurately demonstrate valid relationships?
-- Are plots labeled properly?
-- Are plots interpreted appropriately?
-- Are plots formatted and scaled appropriately for inclusion in a notebook-based technical report?
-
-**Python Syntax and Control Flow**
-- Is care taken to write human readable code?
-- Is the code syntactically correct (no runtime errors)?
-- Does the code generate desired results (logically correct)?
-- Does the code follows general best practices and style guidelines?
-- Are Pandas functions used appropriately?
-- Are `sklearn` methods used appropriately?
-
-**Presentation**
-- Is the problem statement clearly presented?
-- Does a strong narrative run through the presentation building toward a final conclusion?
-- Are the conclusions/recommendations clearly stated?
-- Is the level of technicality appropriate for the intended audience?
-- Is the student substantially over or under time?
-- Does the student appropriately pace their presentation?
-- Does the student deliver their message with clarity and volume?
-- Are appropriate visualizations generated for the intended audience?
-- Are visualizations necessary and useful for supporting conclusions/explaining findings?
-
-In order to pass the project, students must earn a minimum score of 1 for each category.
-- Earning below a 1 in one or more of the above categories would result in a failing project.
-- While a minimum of 1 in each category is the required threshold for graduation, students should aim to earn at least an average of 1.5 across each category. An average score below 1.5, while it may be passing, means students may want to solicit specific feedback in order to significantly improve the project before showcasing it as part of a portfolio or the job search.
-
-### REMEMBER:
-
-This is a learning environment and you are encouraged to try new things, even if they don't work out as well as you planned! While this rubric outlines what we look for in a _good_ project, it is up to you to go above and beyond to create a _great_ project. **Learn from your failures and you'll be prepared to succeed in the workforce**.
+2. Investigate further the effect of outliers on the model, and try to determine if there are high leverage features that have not been identified.
