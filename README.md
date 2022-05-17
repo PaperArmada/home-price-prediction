@@ -86,7 +86,7 @@ Specifically we were seeking to identify:
 #### Conclusions:
 While the model developed is a significant improvement over baseline, it underperforms its peers in the market, and is difficult to ascertain exact impact of features due to coefficients being obscured through LASSO regularization. 
 
-The model does point towards recurring features that appear to have outsized effect, namely: Overall Quality Rating of the Home, Above Ground Living Area, Year Built, Number Car Garage, Year of Remodel, and finally, an inverse relationship with Number of Rooms divided by Above Ground Living Area. This is verified using a substantially simplified model, that while underperforming its more complex cousin, is far more legible and also outperforms the baseline significantly.
+The model does point towards recurring features that appear to have outsized effect, namely: Overall Quality Rating of the Home, Above Ground Living Area, Year Built, Number Car Garage, Year of Remodel, and finally, an inverse relationship with Number of Rooms compared with Above Ground Living Area. This is verified using a substantially simplified model, that while underperforming its more complex cousin, is far more legible and also outperforms the baseline significantly.
 
 #### Recommendations:
 1. As a starting position, we can advise clients who are selling their homes that the overall appearance of quality is of top importance in fetching a high price, and that recent remodels are also valuable. Additionally, when performing a remodel, it is advised to prioritize the size of rooms in the house over the total number of rooms. 
